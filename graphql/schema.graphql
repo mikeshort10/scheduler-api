@@ -1,0 +1,112 @@
+# types of medical specialties
+enum CORS {
+  ALL
+  BRONC
+  CT
+  ENT
+  GENGYN
+  NEURO
+  OPHTHALMOLOGY
+  ORTHO
+  PEDS
+  PU
+  ROBOTICS
+}
+
+# times that an Employee can go to lunch
+enum LunchHours {
+  SEVEN_TO_THREE
+  SEVEN_TO_FIVE
+  SEVEN_TO_SEVEN
+}
+
+# times that an employee will either need lunch or be required to relieve someone needing lunch
+enum ShiftHours {
+  SEVEN_TO_THREE
+  SEVEN_TO_FIVE
+  SEVEN_TO_SEVEN
+  ELEVEN_TO_ELEVEN
+}
+
+# immutable data about an employee
+type Employee {
+  id: ID!
+
+  name: String!
+
+  clingoId: Int
+
+  usualHours: ShiftHours
+
+  primarySpecialty: CORS!
+
+  additionalSpecialties: [CORS!]!
+
+  isTech: Boolean!
+}
+
+input CreateEmployeeInput {
+  name: String!
+
+  clingoId: Int
+
+  usualHours: ShiftHours
+
+  primarySpecialty: CORS!
+
+  additionalSpecialties: [CORS!]!
+
+  isTech: Boolean!
+}
+
+# input UpdateEmployeeInput {
+#   id: ID!
+
+#   clingoId: Int
+
+#   usualHours: ShiftHours
+
+#   specialties: [CORS!]
+
+#   isTech: Boolean
+# }
+
+# information about an employee's shift
+type Shift {
+  employeeId: ID!
+
+  hours: ShiftHours!
+
+  isCirculating: Boolean!
+
+  specialty: CORS!
+}
+
+type Relief {
+  lunch: LunchHours!
+
+  relievee: Int!
+
+  reliever: Int!
+}
+
+type LunchSchedule {
+  reliefs: [Relief!]!
+}
+
+# input WorkDay {
+#   employees: [Employee!]!
+# }
+
+type Query {
+  # createSchedule(shifts: [Shift!]!): LunchSchedule
+  getEmployee(id: ID!): Employee
+  listEmployees: [Employee!]!
+}
+
+type Mutation {
+  deleteEmployee(id: ID!): Boolean!
+  # updateEmployee(employee: UpdateEmployeeInput): Employee
+
+  createEmployee(employee: CreateEmployeeInput!): Employee
+}
