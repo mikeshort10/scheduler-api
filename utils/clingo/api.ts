@@ -1,4 +1,4 @@
-import { ClingoResult } from "clingo-wasm";
+import type { ClingoResult } from "clingo-wasm";
 import { flow } from "fp-ts/lib/function";
 import * as A from "fp-ts/lib/Array";
 import { isNonNullable } from "./index";

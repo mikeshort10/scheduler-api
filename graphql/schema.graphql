@@ -72,14 +72,18 @@ input CreateEmployeeInput {
 # }
 
 # information about an employee's shift
-type Shift {
+input Shift {
   employeeId: ID!
 
   hours: ShiftHours!
 
   isCirculating: Boolean!
 
-  specialty: CORS!
+  currentSpecialty: CORS
+
+  isTech: Boolean!
+
+  specialties: [CORS!]
 }
 
 type Relief {
@@ -99,12 +103,12 @@ type LunchSchedule {
 # }
 
 type Query {
-  # createSchedule(shifts: [Shift!]!): LunchSchedule
   getEmployee(id: ID!): Employee
   listEmployees: [Employee!]!
 }
 
 type Mutation {
+  createSchedule(shifts: [Shift!]!): LunchSchedule
   deleteEmployee(id: ID!): Boolean!
   # updateEmployee(employee: UpdateEmployeeInput): Employee
 

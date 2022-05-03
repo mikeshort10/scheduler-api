@@ -73,8 +73,14 @@ export type MutationDeleteEmployeeArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  createSchedule?: Maybe<LunchSchedule>;
   getEmployee?: Maybe<Employee>;
   listEmployees: Array<Employee>;
+};
+
+
+export type QueryCreateScheduleArgs = {
+  shifts: Array<Shift>;
 };
 
 
@@ -91,10 +97,12 @@ export type Relief = {
 
 export type Shift = {
   __typename?: 'Shift';
+  currentSpecialty?: Maybe<Cors>;
   employeeId: Scalars['ID'];
   hours: ShiftHours;
   isCirculating: Scalars['Boolean'];
-  specialty: Cors;
+  isTech: Scalars['Boolean'];
+  specialties?: Maybe<Array<Cors>>;
 };
 
 export type ShiftHours =
