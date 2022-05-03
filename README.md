@@ -12,8 +12,9 @@ An API that helps calculate valid/optimal schedules for operating rooms at a spe
 - **Primary**: An Employee who needs coverage for lunch.
 - **Shift**: Time when an Employee starts/ends work.
 
-- **Start times** denote if an Employee is a Primary (7am) or Sub (11am). Even if a Sub starts earlier, they will be coded as starting at 11am.
-- **End times** are only important for Primaries (3/5/7pm) and are ignored for Subs.
+  - **Start times** denote if an Employee is a Primary (7am) or Sub (11am). Even if a Sub starts earlier, they will be coded as starting at 11am.
+
+  - **End times** are only important for Primaries (3/5/7pm) and are ignored for Subs.
 
 - **Lunch**: Time to eat, denoted 1st, 2nd, or 3rd.
 - **Specialty**: What skill an Employee is working in during a given shift. An employee can have at most one per shift.
