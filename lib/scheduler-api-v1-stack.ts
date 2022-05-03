@@ -2,6 +2,7 @@ import * as appsync from "@aws-cdk/aws-appsync";
 import * as lambda from "@aws-cdk/aws-lambda";
 import * as dynamodb from "@aws-cdk/aws-dynamodb";
 import { createInitNodeJsResolver } from "../utils/createInitNodeJsResolver";
+import { createInitDockerImageResolver } from "../utils/createInitDockerImageResolver";
 import {
   Stack,
   StackProps,
@@ -10,8 +11,11 @@ import {
   Construct,
 } from "@aws-cdk/core";
 import { NodejsFunction } from "@aws-cdk/aws-lambda-nodejs";
+import { DockerImageFunction } from "@aws-cdk/aws-lambda";
 
-const grantReadData = <R extends { lambdaFunction: NodejsFunction }>(
+const grantReadData = <
+  R extends { lambdaFunction: NodejsFunction | DockerImageFunction }
+>(
   table: dynamodb.Table,
   fns: R[]
 ) => {
@@ -20,7 +24,9 @@ const grantReadData = <R extends { lambdaFunction: NodejsFunction }>(
     .forEach((fn) => table.grantReadData(fn));
 };
 
-const grantReadWriteData = <R extends { lambdaFunction: NodejsFunction }>(
+const grantReadWriteData = <
+  R extends { lambdaFunction: NodejsFunction | DockerImageFunction }
+>(
   table: dynamodb.Table,
   fns: R[]
 ) => {
@@ -65,6 +71,13 @@ export class SchedulerApiV1Stack extends Stack {
       },
     });
 
+    const initDockerImageResolver = createInitDockerImageResolver(this, api, {
+      environment: {
+        EMPLOYEE_TABLE: employeeTable.tableName,
+      },
+    });
+
+    const createScheduleResolver = initDockerImageResolver("createSchedule");
     // const createScheduleResolver = initNodeJsResolver("createSchedule");
     const createEmployeeResolver = initNodeJsResolver(
       "createEmployee",
@@ -82,7 +95,7 @@ export class SchedulerApiV1Stack extends Stack {
     const getEmployeeResolver = initNodeJsResolver("getEmployee");
 
     grantReadData(employeeTable, [
-      // createScheduleResolver,
+      createScheduleResolver,
       listEmployeesResolver,
       getEmployeeResolver,
     ]);
