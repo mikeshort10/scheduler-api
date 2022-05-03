@@ -36,15 +36,19 @@ An API that helps calculate valid/optimal schedules for operating rooms at a spe
 
 ## Rules
 
-An asterisk (\*) denotes a common sense rule, i.e. one that is obvious to a human, but not necessarily a machine.
+A double asterisk (\*\*) denotes a common sense rule, i.e. one that is obvious to a human, but not necessarily a machine. An implicit rule begins with "As a result" and can be inferred from the previous rule, so do not need to be explicitly defined.
 
 1. Everyone Primary gets a lunch.
-2. \*Primaries must have relief from another person.
-3. \*A Sub cannot relieve 2 people for the same lunch. As a result, a Sub cannot relieve more than 2 people for the same lunch.
-4. \*A Primary cannot also be a Sub for the same lunch. As a result, a Primary cannot relieve themselves.
+2. \*\*Primaries must have relief from another Employee.
+3. \*\*A Sub cannot relieve 2 Employees for the same lunch.
+   - As a result, a Sub cannot relieve _more than_ 2 Employees for the same lunch.
+4. \*\*A Primary cannot also be a Sub during the same lunch.
+
+   - As a result, a Primary cannot relieve themselves.
+
 5. To relieve a Primary with Specialty S, a Sub must have the Cors S or "all".
 6. A tech cannot relieve a nurse.
-7. A tech cannot relieve a circulating nurse.
+7. A tech cannot relieve a circulating nurse (??).
 
 ### Coverage Rules:
 
