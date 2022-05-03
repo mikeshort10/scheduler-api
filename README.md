@@ -8,8 +8,8 @@ An API that helps calculate valid/optimal schedules for operating rooms at a spe
 
 - **Schedule**: a schedule of Subs relieving Primaries so they can eat.
 - **Employee**: A nurse or tech who works in an operating room.
-- **Sub**: An Employee who relieves another Employee for lunch.
 - **Primary**: An Employee who needs coverage for lunch.
+- **Sub**: An Employee who relieves another Employee for lunch. A Primary can act as a Sub, though this is not very ideal.
 - **Shift**: Time when an Employee starts/ends work.
 
   - **Start times** denote if an Employee is a Primary (7am) or Sub (11am). Even if a Sub starts earlier, they will be coded as starting at 11am.
@@ -22,7 +22,7 @@ An API that helps calculate valid/optimal schedules for operating rooms at a spe
 
 ### Specialties/Cors
 
-- All _(This is Cors only, not a Specialty)_
+- All _(This is a Cors only, and is provided to an Employee who can cover any Specialty)_
 - ENT
 - Cardio-thoracic
 - General/Gynecology
@@ -33,22 +33,22 @@ An API that helps calculate valid/optimal schedules for operating rooms at a spe
 - Robotics
 - Ophthalmology
 - Bronchology
+- None _(This is a Specialty only, and is provided as a filler to Employees not needing lunch relief)_
 
 ## Rules
 
 A double asterisk (\*\*) denotes a common sense rule, i.e. one that is obvious to a human, but not necessarily a machine. An implicit rule begins with "As a result" and can be inferred from the previous rule, so do not need to be explicitly defined.
 
-1. Everyone Primary gets a lunch.
-2. \*\*Primaries must have relief from another Employee.
-3. \*\*A Sub cannot relieve 2 Employees for the same lunch.
+1. \*\*Primaries must have a lunch relief from a Sub.
+2. \*\*A Sub cannot relieve 2 Employees for the same lunch.
    - As a result, a Sub cannot relieve _more than_ 2 Employees for the same lunch.
-4. \*\*A Primary cannot also be a Sub during the same lunch.
+3. \*\*A Primary cannot also be a Sub during the same lunch.
 
    - As a result, a Primary cannot relieve themselves.
 
-5. To relieve a Primary with Specialty S, a Sub must have the Cors S or "all".
-6. A tech cannot relieve a nurse.
-7. A tech cannot relieve a circulating nurse (??).
+4. To relieve a Primary with Specialty S, a Sub must have the Cors S or "all".
+5. A tech cannot relieve a nurse.
+6. A tech cannot relieve a circulating nurse (??).
 
 ### Coverage Rules:
 
