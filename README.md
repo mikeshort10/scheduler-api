@@ -8,7 +8,7 @@ An API that helps calculate valid/optimal schedules for operating rooms at a spe
 
 - **Schedule**: a schedule of Subs relieving Primaries so they can eat.
 - **Employee**: A nurse or tech who works in an operating room.
-- **Sub**: An Employee who relieves another employee for lunch.
+- **Sub**: An Employee who relieves another Employee for lunch.
 - **Primary**: An Employee who needs coverage for lunch.
 - **Shift**: Time when an Employee starts/ends work.
 
@@ -17,8 +17,8 @@ An API that helps calculate valid/optimal schedules for operating rooms at a spe
   - **End times** are only important for Primaries (3/5/7pm) and are ignored for Subs.
 
 - **Lunch**: Time to eat, denoted 1st, 2nd, or 3rd.
-- **Specialty**: What skill an Employee is working in during a given shift. An employee can have at most one per shift.
-- **Cors**: The Specialty that an Employee can provide coverage for. An employee can multiple have Cors.
+- **Specialty**: What skill a Primary is working in during a given shift. An employee can have at most one per shift.
+- **Cors**: The Specialty that a Sub/Primary can provide coverage for. An Employee can multiple have Cors.
 
 ### Specialties/Cors
 
