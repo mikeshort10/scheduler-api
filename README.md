@@ -52,10 +52,10 @@ A double asterisk (\*\*) denotes a common sense rule, i.e. one that is obvious t
 
 ### Coverage Rules:
 
-N*: nurse
-T*: tech
-*C: circulating
-*S: scrubbed
+- N\_: Nurse
+- T\_: Tech
+- \_C: Circulating
+- \_S: Scrubbed
 
 | Sub\Primary | NC  | NS  | TC  | TS  |
 | ----------- | --- | --- | --- | --- |
@@ -64,7 +64,7 @@ T*: tech
 | TC          |     |     | X   | X   |
 | TS          |     |     | X   | X   |
 
-_\*X = Sub can relieve Primary_
+_\*X = Sub (header column) can relieve Primary (header row)_
 
 ## Penalties
 
