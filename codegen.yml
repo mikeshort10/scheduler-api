@@ -9,3 +9,9 @@ generates:
     config:
       maybeValue: T | null | undefined
       enumsAsTypes: true
+  dockerImages/createSchedule/types/api.d.ts:
+    plugins:
+      - typescript
+    config:
+      maybeValue: T | null | undefined
+      enumsAsTypes: true
