@@ -7,13 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --build",
     "docker-build": "docker build -t hello-world .",
-    "docker-run": "docker run -p 9000:8080 hello-world"
+    "docker-run": "docker run -p 9000:8080 hello-world",
+    "copy-clingo": "node copyClingoToJs.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "clingo-wasm": "^0.0.10",
+    "fp-ts": "^2.12.1",
     "graphql": "^16.4.0"
   },
   "devDependencies": {
