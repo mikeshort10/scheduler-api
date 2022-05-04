@@ -52,12 +52,13 @@ export type LunchHours =
 
 export type LunchSchedule = {
   __typename?: 'LunchSchedule';
-  reliefs: Array<Relief>;
+  reliefs: Array<Reliever>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   createEmployee?: Maybe<Employee>;
+  createSchedule?: Maybe<LunchSchedule>;
   deleteEmployee: Scalars['Boolean'];
 };
 
@@ -67,20 +68,19 @@ export type MutationCreateEmployeeArgs = {
 };
 
 
+export type MutationCreateScheduleArgs = {
+  shifts: Array<Shift>;
+};
+
+
 export type MutationDeleteEmployeeArgs = {
   id: Scalars['ID'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  createSchedule?: Maybe<LunchSchedule>;
   getEmployee?: Maybe<Employee>;
   listEmployees: Array<Employee>;
-};
-
-
-export type QueryCreateScheduleArgs = {
-  shifts: Array<Shift>;
 };
 
 
@@ -91,18 +91,22 @@ export type QueryGetEmployeeArgs = {
 export type Relief = {
   __typename?: 'Relief';
   lunch: LunchHours;
-  relievee: Scalars['Int'];
-  reliever: Scalars['Int'];
+  relievee: Scalars['ID'];
+};
+
+export type Reliever = {
+  __typename?: 'Reliever';
+  id: Scalars['ID'];
+  reliefs?: Maybe<Array<Maybe<Relief>>>;
 };
 
 export type Shift = {
-  __typename?: 'Shift';
-  currentSpecialty?: Maybe<Cors>;
+  currentSpecialty?: InputMaybe<Cors>;
   employeeId: Scalars['ID'];
   hours: ShiftHours;
   isCirculating: Scalars['Boolean'];
   isTech: Scalars['Boolean'];
-  specialties?: Maybe<Array<Cors>>;
+  specialties?: InputMaybe<Array<Cors>>;
 };
 
 export type ShiftHours =

@@ -6,10 +6,3 @@ export type APSGraphQLAPIResolverHandler<
   FieldName extends keyof Query,
   Args
 > = AppSyncResolverHandler<Args, Query[FieldName] | GraphQLError | void>;
-
-export type RelaySpecs = {
-  after?: InputMaybe<string>;
-  before?: InputMaybe<string>;
-  first?: number;
-  last?: number;
-};
