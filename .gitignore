@@ -11,6 +11,9 @@ cdk.out
 
 # favor yarn.lock
 package-lock.json
+!dockerImages/**/package-lock.json
+dockerImages/**/yarn.lock
 
 .env*
 .vscode
+build/
