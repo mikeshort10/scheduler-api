@@ -89,13 +89,17 @@ input Shift {
 type Relief {
   lunch: LunchHours!
 
-  relievee: Int!
+  relievee: ID!
+}
 
-  reliever: Int!
+type Reliever {
+  id: ID!
+
+  reliefs: [Relief]
 }
 
 type LunchSchedule {
-  reliefs: [Relief!]!
+  relievers: [Reliever!]!
 }
 
 # input WorkDay {
