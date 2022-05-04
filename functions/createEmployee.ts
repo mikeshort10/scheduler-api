@@ -19,7 +19,10 @@ export const handler: Handler = async (event) => {
       return null;
     }
 
-    const employee: Employee = { ...event.arguments.employee, id: uuidv4() };
+    const employee: Employee = {
+      ...event.arguments.employee,
+      id: `v1_${uuidv4().replace("-", "_")}`,
+    };
 
     await documentClient
       .put({
