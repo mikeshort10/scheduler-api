@@ -21,7 +21,7 @@ export const handler: Handler = async (event) => {
 
     const employee: Employee = {
       ...event.arguments.employee,
-      id: `v1_${uuidv4().replace("-", "_")}`,
+      id: `v1_${uuidv4().replace(/-/g, "_")}`,
     };
 
     await documentClient
