@@ -34,7 +34,7 @@ export const handler: Handler = async (event) => {
     E.map(({ cover = [], ...rest }): LunchSchedule => {
       console.log(cover, rest);
       return {
-        reliefs: pipe(
+        relievers: pipe(
           cover,
           A.map(([reliever, relievee, lunch]) => {
             const lunches = [
@@ -76,39 +76,39 @@ export const handler: Handler = async (event) => {
   return result;
 };
 
-handler({
-  arguments: {
-    shifts: [
-      {
-        hours: "ELEVEN_TO_ELEVEN",
-        currentSpecialty: "CT",
-        isTech: true,
-        isCirculating: true,
-        employeeId: "v1_1",
-        specialties: ["CT"],
-      },
-      {
-        hours: "SEVEN_TO_THREE",
-        currentSpecialty: "CT",
-        isTech: true,
-        isCirculating: true,
-        employeeId: "v1_2",
-        specialties: [],
-      },
-      {
-        hours: "SEVEN_TO_FIVE",
-        currentSpecialty: "CT",
-        isTech: true,
-        isCirculating: true,
-        employeeId: "v1_3",
-      },
-      {
-        hours: "SEVEN_TO_SEVEN",
-        currentSpecialty: "CT",
-        isTech: true,
-        isCirculating: true,
-        employeeId: "v1_4",
-      },
-    ],
-  },
-});
+// handler({
+//   arguments: {
+//     shifts: [
+//       {
+//         hours: "ELEVEN_TO_ELEVEN",
+//         currentSpecialty: "CT",
+//         isTech: true,
+//         isCirculating: true,
+//         employeeId: "v1_1",
+//         specialties: ["CT"],
+//       },
+//       {
+//         hours: "SEVEN_TO_THREE",
+//         currentSpecialty: "CT",
+//         isTech: true,
+//         isCirculating: true,
+//         employeeId: "v1_2",
+//         specialties: [],
+//       },
+//       {
+//         hours: "SEVEN_TO_FIVE",
+//         currentSpecialty: "CT",
+//         isTech: true,
+//         isCirculating: true,
+//         employeeId: "v1_3",
+//       },
+//       {
+//         hours: "SEVEN_TO_SEVEN",
+//         currentSpecialty: "CT",
+//         isTech: true,
+//         isCirculating: true,
+//         employeeId: "v1_4",
+//       },
+//     ],
+//   },
+// });

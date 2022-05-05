@@ -52,7 +52,7 @@ export type LunchHours =
 
 export type LunchSchedule = {
   __typename?: 'LunchSchedule';
-  reliefs: Array<Reliever>;
+  relievers: Array<Reliever>;
 };
 
 export type Mutation = {
