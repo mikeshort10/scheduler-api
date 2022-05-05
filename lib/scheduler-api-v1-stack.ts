@@ -77,8 +77,10 @@ export class SchedulerApiV1Stack extends Stack {
       },
     });
 
-    const createScheduleResolver = initDockerImageResolver("createSchedule");
-    // const createScheduleResolver = initNodeJsResolver("createSchedule");
+    const createScheduleResolver = initDockerImageResolver(
+      "createSchedule",
+      "Mutation"
+    );
     const createEmployeeResolver = initNodeJsResolver(
       "createEmployee",
       "Mutation"
@@ -92,7 +94,7 @@ export class SchedulerApiV1Stack extends Stack {
       "Mutation"
     );
     const listEmployeesResolver = initNodeJsResolver("listEmployees", "Query");
-    const getEmployeeResolver = initNodeJsResolver("getEmployee");
+    const getEmployeeResolver = initNodeJsResolver("getEmployee", "Query");
 
     grantReadData(employeeTable, [
       createScheduleResolver,

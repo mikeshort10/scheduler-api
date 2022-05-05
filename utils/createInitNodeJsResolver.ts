@@ -3,6 +3,7 @@ import * as appsync from "@aws-cdk/aws-appsync";
 import * as lambda from "@aws-cdk/aws-lambda";
 import * as nodeJsLambda from "@aws-cdk/aws-lambda-nodejs";
 import * as path from "path";
+import { Mutation, Query } from "../types";
 
 export const createInitNodeJsResolver =
   (
@@ -10,7 +11,10 @@ export const createInitNodeJsResolver =
     api: appsync.GraphqlApi,
     commonLambdaProps: Omit<lambda.FunctionProps, "handler">
   ) =>
-  (fieldName: string, typeName: "Query" | "Mutation" = "Query") => {
+  <QM extends Query | Mutation>(
+    fieldName: keyof Mutation | keyof Query,
+    typeName: NonNullable<QM["__typename"]>
+  ) => {
     const lambdaFunction = new nodeJsLambda.NodejsFunction(
       scope,
       `${fieldName}Handler`,
