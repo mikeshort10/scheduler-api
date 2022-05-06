@@ -10,6 +10,7 @@
 % Someone cannot cover a lunch that they're receiving coverage for
 :- cover(P1, P2, L), cover(P2, P3, L).
 
+
 % It cannot happen that P1 covers P2, and P1 is a tech and P2 is not a tech (nurse)
 % A tech cannot cover a nurse
 :- cover(P1, P2, L), isTech(P1, true), isTech(P2, false).
@@ -25,7 +26,12 @@ penalty(P, 4) :- shift(P, 7, 5), cover(C, P, 3).
 penalty(P, 1000) :- shift(P, 7, 7), cover(C, P, 1).
 penalty(P, 7) :- shift(P, 7, 7), cover(C, P, 2).
 
-penalty(P2, 100000) :- shift(P1, 7, D1), cover(P2, P1, L), shift(P2, 7, D2).
+% large penalty for making a primary cover someone
+penalty(P2, 50000) :- cover(P2, P1, L), shift(P2, 7, D2).
+
+% extra penalty for making a primary cover 2+ times
+% TODO this still administers equal penalty for a primary relieving 2 or 3 times. We need to redefine totalPenalty to include that logic though.
+penalty(P1, 1000000) :- cover(P1, P2, L1), cover(P1, P3, L2), shift(P1, 7, D1), L1 != L2.
 
 totalPenalty(TP) :- TP = #sum{Penality, Person : penalty(Person, Penality)}.
 
