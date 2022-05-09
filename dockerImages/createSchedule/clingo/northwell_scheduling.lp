@@ -10,13 +10,8 @@
 % Someone cannot cover a lunch that they're receiving coverage for
 :- cover(P1, P2, L), cover(P2, P3, L).
 
-
-% It cannot happen that P1 covers P2, and P1 is a tech and P2 is not a tech (nurse)
-% A tech cannot cover a nurse
-:- cover(P1, P2, L), isTech(P1, true), isTech(P2, false).
-
-% It cannot happen that a tech covers for a nurse who is circulating
-% :- cover(P1, P2, L), isTech(P1, true), isTech(P2, false), isCirculating(P2, true).
+% A tech cannot cover a nurse who is circulating
+:- cover(P1, P2, L), isTech(P1, true), isTech(P2, false), isCirculating(PR, true).
 
 % PENALTIES 
 penalty(P, 5) :- shift(P, 7, 3), cover(C, P, 3).

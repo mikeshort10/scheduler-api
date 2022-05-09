@@ -47,8 +47,7 @@ A double asterisk (\*\*) denotes a common sense rule, i.e. one that is obvious t
    - As a result, a Primary cannot relieve themselves.
 
 4. To relieve a Primary with Specialty S, a Sub must have the Cors S or "all".
-5. A tech cannot relieve a nurse.
-6. A tech cannot relieve a circulating nurse (??).
+5. A tech cannot relieve a nurse who is circulating.
 
 ### Coverage Rules:
 
@@ -57,12 +56,11 @@ A double asterisk (\*\*) denotes a common sense rule, i.e. one that is obvious t
 - \_C: Circulating
 - \_S: Scrubbed
 
-| Sub\Primary | NC  | NS  | TC  | TS  |
-| ----------- | --- | --- | --- | --- |
-| NC          | X   | X   | X   | X   |
-| NS          | X   | X   | X   | X   |
-| TC          |     |     | X   | X   |
-| TS          |     |     | X   | X   |
+| Sub\Primary | NC  | NS  | T   |
+| ----------- | --- | --- | --- |
+| NC          | X   | X   | X   |
+| NS          | X   | X   | X   |
+| T           |     | X   | X   |
 
 _\*X = Sub (header column) can relieve Primary (header row)_
 
@@ -80,4 +78,4 @@ For example, a 1st shift should always be assigned to second lunch over third lu
 | 7am-5pm (2nd) | 100  | 0   | 4   |
 | 7am-7pm (3rd) | 1000 | 7   | 0   |
 
-Additionally, 10,000 penalty points will be added if a Primary must cover another Primary's lunch. This would then be a rare occurrence, but not a hard rule.
+Additionally, 50,000 penalty points will be added if a Primary must cover another Primary's lunch. This would then be a rare occurrence, but not a hard rule. If a Primary must cover two lunch, 100,000 additional points are added.
