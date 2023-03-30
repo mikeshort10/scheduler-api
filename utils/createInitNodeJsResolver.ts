@@ -1,13 +1,15 @@
-import * as cdk from "@aws-cdk/core";
-import * as appsync from "@aws-cdk/aws-appsync";
-import * as lambda from "@aws-cdk/aws-lambda";
-import * as nodeJsLambda from "@aws-cdk/aws-lambda-nodejs";
+import {
+  aws_appsync as appsync,
+  aws_lambda as lambda,
+  aws_lambda_nodejs as nodeJsLambda,
+} from "aws-cdk-lib";
 import * as path from "path";
 import { Mutation, Query } from "../types";
+import { Construct } from "constructs";
 
 export const createInitNodeJsResolver =
   (
-    scope: cdk.Construct,
+    scope: Construct,
     api: appsync.GraphqlApi,
     commonLambdaProps: Omit<lambda.FunctionProps, "handler">
   ) =>
@@ -29,7 +31,7 @@ export const createInitNodeJsResolver =
       lambdaFunction
     );
 
-    const resolver = dataSource.createResolver({
+    const resolver = dataSource.createResolver(`${fieldName}Resolver`, {
       typeName,
       fieldName,
     });

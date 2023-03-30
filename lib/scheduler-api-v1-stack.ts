@@ -1,22 +1,10 @@
-import * as appsync from "@aws-cdk/aws-appsync";
-import * as lambda from "@aws-cdk/aws-lambda";
-import * as dynamodb from "@aws-cdk/aws-dynamodb";
 import { createInitNodeJsResolver } from "../utils/createInitNodeJsResolver";
 import { createInitDockerImageResolver } from "../utils/createInitDockerImageResolver";
-import {
-  Stack,
-  StackProps,
-  Expiration,
-  Duration,
-  Construct,
-} from "@aws-cdk/core";
-import { NodejsFunction } from "@aws-cdk/aws-lambda-nodejs";
-import { DockerImageFunction } from "@aws-cdk/aws-lambda";
+import * as cdk from "aws-cdk-lib";
+import { Construct } from "constructs";
 
-const grantReadData = <
-  R extends { lambdaFunction: NodejsFunction | DockerImageFunction }
->(
-  table: dynamodb.Table,
+const grantReadData = <R extends { lambdaFunction: cdk.aws_iam.IGrantable }>(
+  table: cdk.aws_dynamodb.Table,
   fns: R[]
 ) => {
   fns
@@ -25,9 +13,13 @@ const grantReadData = <
 };
 
 const grantReadWriteData = <
-  R extends { lambdaFunction: NodejsFunction | DockerImageFunction }
+  R extends {
+    lambdaFunction:
+      | cdk.aws_lambda_nodejs.NodejsFunction
+      | cdk.aws_lambda.DockerImageFunction;
+  }
 >(
-  table: dynamodb.Table,
+  table: cdk.aws_dynamodb.Table,
   fns: R[]
 ) => {
   fns
@@ -35,36 +27,36 @@ const grantReadWriteData = <
     .forEach((fn) => table.grantReadWriteData(fn));
 };
 
-export class SchedulerApiV1Stack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+export class SchedulerApiV1Stack extends cdk.Stack {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const api = new appsync.GraphqlApi(this, "ScheduleApi", {
+    const api = new cdk.aws_appsync.GraphqlApi(this, "ScheduleApi", {
       name: "scheduler-api",
-      schema: appsync.Schema.fromAsset("graphql/schema.graphql"),
+      schema: cdk.aws_appsync.SchemaFile.fromAsset("graphql/schema.graphql"),
       authorizationConfig: {
         defaultAuthorization: {
-          authorizationType: appsync.AuthorizationType.API_KEY,
+          authorizationType: cdk.aws_appsync.AuthorizationType.API_KEY,
           apiKeyConfig: {
             name: "API key",
-            expires: Expiration.after(Duration.days(365)),
+            expires: cdk.Expiration.after(cdk.Duration.days(365)),
           },
         },
       },
     });
 
-    const employeeTable = new dynamodb.Table(this, "EmployeeTable", {
+    const employeeTable = new cdk.aws_dynamodb.Table(this, "EmployeeTable", {
       partitionKey: {
         name: "id",
-        type: dynamodb.AttributeType.STRING,
+        type: cdk.aws_dynamodb.AttributeType.STRING,
       },
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      billingMode: cdk.aws_dynamodb.BillingMode.PAY_PER_REQUEST,
     });
 
     const initNodeJsResolver = createInitNodeJsResolver(this, api, {
-      code: lambda.Code.fromAsset("functions"),
-      runtime: lambda.Runtime.NODEJS_14_X,
-      architecture: lambda.Architecture.ARM_64,
+      code: cdk.aws_lambda.Code.fromAsset("functions"),
+      runtime: cdk.aws_lambda.Runtime.NODEJS_14_X,
+      architecture: cdk.aws_lambda.Architecture.ARM_64,
       memorySize: 1024,
       environment: {
         EMPLOYEE_TABLE: employeeTable.tableName,
