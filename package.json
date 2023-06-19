@@ -30,7 +30,7 @@
     "typescript": "~3.9.7"
   },
   "dependencies": {
-    "aws-cdk-lib": "^2.0.0",
+    "aws-cdk-lib": "^2.80.0",
     "aws-sdk": "^2.1354.0",
     "clingo-wasm": "^0.0.10",
     "constructs": "^10.0.0",
