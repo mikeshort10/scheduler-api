@@ -16,7 +16,7 @@
   "dependencies": {
     "clingo-wasm": "^0.0.10",
     "fp-ts": "^2.12.1",
-    "graphql": "^16.4.0"
+    "graphql": "^16.8.1"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.95",
